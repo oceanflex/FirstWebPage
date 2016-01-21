@@ -30,8 +30,8 @@ public class HelloController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             String name = request.getParameter("username");
-            String responseMsg = "Helo " + name + 
-                    " , isn't Java great!";
+            String responseMsg = "Hello " + name + 
+                    ", isn't Java great!";
             request.setAttribute("myMsg", responseMsg);
             
             RequestDispatcher view = 
