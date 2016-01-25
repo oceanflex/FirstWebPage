@@ -54,7 +54,19 @@ public class HelloController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            String age = request.getParameter("age");
+            String responseMsg = "You are " + age + 
+                    " years old.";
+            request.setAttribute("myMsg", responseMsg);
+            
+            RequestDispatcher view = 
+                    request.getRequestDispatcher("/helloResponse.jsp");
+            view.forward(request, response);
+        }catch(Exception e){
+            request.setAttribute("errorMsg", e.getMessage());
+        }
     }
 
     /**
@@ -68,7 +80,19 @@ public class HelloController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            String name = request.getParameter("username");
+            String responseMsg = "Hello " + name + 
+                    ", isn't Java great!";
+            request.setAttribute("myMsg", responseMsg);
+            
+            RequestDispatcher view = 
+                    request.getRequestDispatcher("/helloResponse.jsp");
+            view.forward(request, response);
+        }catch(Exception e){
+            request.setAttribute("errorMsg", e.getMessage());
+        }
     }
 
     /**
