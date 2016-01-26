@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.HelloService;
 
 /**
  *
@@ -30,8 +31,8 @@ public class HelloController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             String name = request.getParameter("username");
-            String responseMsg = "Hello " + name + 
-                    ", isn't Java great!";
+            HelloService service = new HelloService();
+            String responseMsg = service.sayHello(name);
             request.setAttribute("myMsg", responseMsg);
             
             RequestDispatcher view = 
